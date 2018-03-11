@@ -10,16 +10,20 @@
     </style>
 </head>
 <body>
-<div id="view_port"></div>
+<div id="view_port">
+    <!-- <img src="res/skycity.jpg" /> -->
+</div>
 
-<script src="//vmwed.com/jGE/jGE.min.js"></script>
-<!-- <script src="http://127.0.0.1:2262/release/jGE.js"></script> -->
+<!-- <script src="//vmwed.com/jGE/jGE.min.js"></script> -->
+<script src="http://127.0.0.1:2262/release/jGE.js"></script>
 <script src="lib/jGE.Debug.js"></script>
+<script src="tape.js"></script>
+<script src="musicbox.js"></script>
 
 <script>
     (function(){
-
-        
+        const mb = new MusicBox("view_port");
+        window.mb = mb;
     })();
 </script>
 </body>
