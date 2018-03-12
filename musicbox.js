@@ -1,13 +1,14 @@
 class MusicBox {
     constructor(domName) {
+        this.curSetting = this.GetSetting();
         this._jGE = new jGE({
             width: document.documentElement.clientWidth
             , height: document.documentElement.clientHeight
         });
+        
         this.tape = null;
         this.music_box = null;
         document.getElementById(domName).appendChild(this._jGE.GetDom());
-        this.curSetting = this.GetSetting();
         this.Turn(Symbol.for("vertical"));
 
         this.LoadResourcePack();
@@ -17,7 +18,9 @@ class MusicBox {
     StartUp() {
         this.ShowBG();
 
+        this._jGE.backgroundColor = this.curSetting.setting.backgroundColor;
         this.tape = new Tape(this.curSetting);
+        this.tape.Init(this._jGE);
         this.music_box = new ShowObj();
         this.music_box.add(this.tape);
         this.music_box.index = 10;
@@ -65,7 +68,8 @@ class MusicBox {
                 , max_height: (this.curSetting.pitch_names.length - 1) * this.curSetting.tape.cell_width
             });
         }
-        if (this.tape) this.tape.setting = this.curSetting;
+        //if (this.tape) this.tape.setting = this.curSetting;
+        this.ToggleDirection();
     }
 
     GetSetting() {
@@ -80,15 +84,15 @@ class MusicBox {
                 cell_width: 23.6
                 , cell_height: 47.3
                 , pos: { x: 91.3, y: 508 } //{x:507,y:91} //{x:91.3,y:508}
-                , max_width: this._jGE.GetArea().width
-                , max_height: this._jGE.GetArea().height
+                , max_width: window.outerWidth
+                , max_height: window.outerHeight
             }
             , setting: {
                 zoom: 1     //缩放
                 , direction: undefined //vertical horizontal
                 , speed: 1
-                , backgroundColor: "white"
-                , lineColor: "white"
+                , backgroundColor: "#eeeecc"
+                , lineColor: "#333399"
 
             }
             , background: {
@@ -111,4 +115,10 @@ class MusicBox {
         //加载声音资源
 
     }
+
+
+    //内部通讯的公共方法
+    Play(){this._jGE.broadcast("MusicBox.Play");}
+    Stop(){this._jGE.broadcast("MusicBox.Stop");}
+    ToggleDirection(){this._jGE.broadcast("MusicBox.ToggleDirection",this.curSetting.setting.direction);}
 }
