@@ -4,15 +4,14 @@ class Tape extends ShowObj {
         this.status = {
             playing: false
             , direction: null
+            , NoSize: 30    //序号的尺寸
         };
         this.setting = setting;
         this.index = 10;
 
-        this.s = [];
-        this.l = [];
-        this.create_line_l();
-        this.create_line_s(50);
-
+        this.s = [];//短线对象
+        this.l = [];//长线对象
+        this.no = []; //序号对象
         this.on = null;
     }
 
@@ -20,19 +19,21 @@ class Tape extends ShowObj {
         this.on = jGE.on;
         this.status.direction = this.setting.setting.direction;
         this.InitListener();
+        this.create_line_l();
+        this.create_line_s(50);
     }
 
     InitListener() {
         this.on("MusicBox.Play", () => {
             this.status.playing = true;
-            this.update_line();
+            this.refresh();
         });
         this.on("MusicBox.Stop", () => {
             this.status.playing = false;
         });
         this.on("MusicBox.ToggleDirection", (d) => {
             this.status.direction = d;
-            this.update_line();
+            this.refresh();
         });
     }
 
@@ -71,28 +72,42 @@ class Tape extends ShowObj {
     //创建行号
     create_no(index) {
         if (index != 1 && index % 5 != 0) return;
-        let fontSize = 30;
-        let [x, y] = this.status.direction === Symbol.for("vertical") ? [-fontSize, this.setting.tape.cell_height * (index - 1)] : [0, 0];
-        this.add(new $tk_font({ text: index, style: 'orange', font: `${fontSize}px serif`, pos: [x, y] }));
+        let fontSize = this.status.NoSize;
+        let [x, y] = this.get_no_pos(index, fontSize);
+        let n = new $tk_font({ text: index, style: 'orange', font: `${fontSize}px serif`, pos: [x, y] });
+        this.no.push(n);
+        this.add(n);
     }
 
     update(t, pPos = { x: 0, y: 0 }, angle = 0) {
         if (this.status.playing) {
-            this.setting.tape.pos.y -= this.setting.setting.speed;
+            if(this.status.direction === Symbol.for("vertical") )this.setting.tape.pos.y -= this.setting.setting.speed;
+            else this.setting.tape.pos.x -= this.setting.setting.speed;
             this.x = this.setting.tape.pos.x;
             this.y = this.setting.tape.pos.y;
         }
         super.update(t, pPos, angle);
 
-        if (this.setting.tape.pos.y * -1 > this.s.length * this.setting.tape.cell_height - this.setting.tape.max_height)
+        if (this.setting.tape.pos.y * -1 > this.s.length * this.setting.tape.cell_height - this.setting.tape.max_height
+        ||this.setting.tape.pos.x * -1 > this.s.length * this.setting.tape.cell_height - this.setting.tape.max_width)
             this.create_line_s(50);
+
+        this.update_line_l();
     }
 
-    update_line_l() {
+    refresh() {
+        this.update_line_l();
         this.s.forEach((l, index) => {
             let [a, b] = [...this.get_line_s(index).points];
             l.points = [new Vector2D(...a), new Vector2D(...b)];
         });
+
+        this.no.forEach((o, index) => {
+            o.pos = new Vector2D(...this.get_no_pos(index*5+1, this.status.NoSize));
+        })
+    }
+
+    update_line_l() {
         this.l.forEach((l, index) => {
             let [a, b] = [...this.get_line_l(index).points];
             l.points = [new Vector2D(...a), new Vector2D(...b)];
@@ -122,12 +137,16 @@ class Tape extends ShowObj {
         } : {
                 points: [
                     [0, index * this.setting.tape.cell_width]
-                    , [this.setting.tape.max_width, this.setting.tape.cell_width * index]
+                    , [this.setting.tape.max_width-this.x, this.setting.tape.cell_width * index]
                 ]
             }
     }
 
-
+    get_no_pos(index, fontSize) {
+        return this.status.direction === Symbol.for("vertical")
+            ? [-fontSize, this.setting.tape.cell_height * (index - 1)]
+            : [this.setting.tape.cell_height * (index - 1), this.setting.tape.cell_width*this.setting.pitch_names.length ];
+    }
 
 
     // render(ctx){

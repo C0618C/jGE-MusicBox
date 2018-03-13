@@ -7,6 +7,7 @@ class MusicBox {
         });
         
         this.tape = null;
+        this.dial = null;
         this.music_box = null;
         document.getElementById(domName).appendChild(this._jGE.GetDom());
         this.Turn(Symbol.for("vertical"));
@@ -21,8 +22,11 @@ class MusicBox {
         this._jGE.backgroundColor = this.curSetting.setting.backgroundColor;
         this.tape = new Tape(this.curSetting);
         this.tape.Init(this._jGE);
+        this.dial = new Dial(this.curSetting);
+
         this.music_box = new ShowObj();
         this.music_box.add(this.tape);
+        this.music_box.add(this.dial);
         this.music_box.index = 10;
 
         this._jGE.add(this.music_box);
@@ -57,14 +61,14 @@ class MusicBox {
         this.curSetting.setting.direction = direction;
         if (direction === Symbol.for("vertical")) {
             Object.assign(this.curSetting.tape, {
-                pos: { x: 91.3, y: 508 } //{x:507,y:91} //{x:91.3,y:508}
-                , max_width: (this.curSetting.pitch_names.length - 1) * this.curSetting.tape.cell_width
+                //pos: { x: 91.3, y: 508 } //{x:507,y:91} //{x:91.3,y:508}
+                 max_width: (this.curSetting.pitch_names.length - 1) * this.curSetting.tape.cell_width
                 , max_height: this._jGE.GetArea().height
             });
         } else {
             Object.assign(this.curSetting.tape, {
-                pos: { x: 507, y: 91 } //{x:91.3,y:508}
-                , max_width: this._jGE.GetArea().width
+                //pos: { x: 507, y: 91 } //{x:91.3,y:508}
+                 max_width: this._jGE.GetArea().width
                 , max_height: (this.curSetting.pitch_names.length - 1) * this.curSetting.tape.cell_width
             });
         }
@@ -83,7 +87,7 @@ class MusicBox {
             , tape: {         //纸带
                 cell_width: 23.6
                 , cell_height: 47.3
-                , pos: { x: 91.3, y: 508 } //{x:507,y:91} //{x:91.3,y:508}
+                , pos: { x: 300, y: 500} //{x:507,y:91} //{x:91.3,y:508}
                 , max_width: window.outerWidth
                 , max_height: window.outerHeight
             }
