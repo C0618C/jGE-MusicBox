@@ -98,12 +98,12 @@ class Tape extends ShowObj {
     refresh() {
         this.update_line_l();
         this.s.forEach((l, index) => {
-            let [a, b] = [...this.get_line_s(index).points];
+            let [a, b] = [...MLC.get_line_s(index,this.setting,this.status).points];
             l.points = [new Vector2D(...a), new Vector2D(...b)];
         });
 
         this.no.forEach((o, index) => {
-            o.pos = new Vector2D(...this.get_no_pos(index*5+1, this.status.NoSize));
+            o.pos = new Vector2D(...MLC.get_no_pos(index*5+1, this.status.NoSize,this.setting,this.status));
         })
     }
 

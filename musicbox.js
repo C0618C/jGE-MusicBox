@@ -87,7 +87,7 @@ class MusicBox {
             , tape: {         //纸带
                 cell_width: 23.6
                 , cell_height: 47.3
-                , pos: { x: 300, y: 500} //{x:507,y:91} //{x:91.3,y:508}
+                , pos: { x: 170, y: -500} //{x:507,y:91} //{x:91.3,y:508}
                 , max_width: window.outerWidth
                 , max_height: window.outerHeight
             }
