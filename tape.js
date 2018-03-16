@@ -7,7 +7,7 @@ class Tape extends ShowObj {
             , NoSize: 30    //序号的尺寸
         };
         this.setting = setting;
-        this.index = 10;
+        //this.index = 10;
 
         this.s = [];//短线对象
         this.l = [];//长线对象
@@ -74,7 +74,7 @@ class Tape extends ShowObj {
         if (index != 1 && index % 5 != 0) return;
         let fontSize = this.status.NoSize;
         let [x, y] = MLC.get_no_pos(index, fontSize,this.setting,this.status);
-        let n = new $tk_font({ text: index, style: 'orange', font: `${fontSize}px serif`, pos: [x, y] });
+        let n = new $tk_font({ text: index, style: '#333399', font: `${fontSize}px serif`, pos: [x, y] });
         this.no.push(n);
         this.add(n);
     }

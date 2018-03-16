@@ -37,6 +37,14 @@ class MusicBox_Layout_Control{
             : [setting.tape.cell_height * (index - 1), setting.tape.cell_width*setting.pitch_names.length ];
     }
 
+    static get_dial_ract(setting,px=0){
+        let w = setting.tape.cell_width*setting.pitch_names.length/2+setting.tape.cell_width/3;
+        let h = setting.tape.cell_height/3;
+        return setting.setting.direction === Symbol.for("vertical")
+        ? {points: [[-w,px-h],[w,px-h],[w,h+px],[-w,h+px],-1]}
+        : {points: [0,0 ]};
+    }
+
 }
 
 const MLC = MusicBox_Layout_Control;

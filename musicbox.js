@@ -23,6 +23,7 @@ class MusicBox {
         this.tape = new Tape(this.curSetting);
         this.tape.Init(this._jGE);
         this.dial = new Dial(this.curSetting);
+        
 
         this.music_box = new ShowObj();
         this.music_box.add(this.tape);
@@ -81,13 +82,13 @@ class MusicBox {
             pitch_names: [ //音名
                 "C", "D", "G", "A", "B"
                 , "C1", "D1", "E1", "F1", "#F1", "G1", "#G1", "A1", "#A1", "B1"
-                , "C#2", "C2", "D#2", "D2", "E2", "F2", "#F2", "G2", "#G2", "A2", "#A2", "B2"
+                , "C2", "#C2", "D2", "#D2", "E2", "F2", "#F2", "G2", "#G2", "A2", "#A2", "B2"
                 , "C3", "D3", "E3"
             ]
             , tape: {         //纸带
                 cell_width: 23.6
                 , cell_height: 47.3
-                , pos: { x: 170, y: -500} //{x:507,y:91} //{x:91.3,y:508}
+                , pos: { x: 170, y: 0} //{x:507,y:91} //{x:91.3,y:508}
                 , max_width: window.outerWidth
                 , max_height: window.outerHeight
             }
@@ -95,7 +96,7 @@ class MusicBox {
                 zoom: 1     //缩放
                 , direction: undefined //vertical horizontal
                 , speed: 1
-                , backgroundColor: "#eeeecc"
+                , backgroundColor: "GhostWhite"
                 , lineColor: "#333399"
 
             }
