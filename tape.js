@@ -37,6 +37,20 @@ class Tape extends ShowObj {
         });
     }
 
+    DragStart(){
+        this._drag_start_pos = new Vector2D(this);
+    }
+
+    DragHandler(sP,curP){
+        this.status.playing = false;
+
+        if(this.status.direction === Symbol.for("vertical") ) this.y = this._drag_start_pos.y + curP.y-sP.y;
+        else  this.x = this._drag_start_pos.x + curP.x-sP.x;
+
+        this.setting.tape.pos.x = this.x;
+        this.setting.tape.pos.y = this.y;
+    }
+
 
     //创建短线（垂直方向时的横线）
     create_line_s(num) {

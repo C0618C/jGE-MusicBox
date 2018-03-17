@@ -30,6 +30,8 @@ class MusicBox {
         this.music_box.add(this.dial);
         this.music_box.index = 10;
 
+        this.drag = new DragListener(this,this.curSetting);
+
         this._jGE.add(this.music_box);
     }
 

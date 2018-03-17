@@ -16,25 +16,24 @@ class Dial extends ShowObj {
             , startAngle: 0, endAngle: π2
         }));
 
-        let a = new $tk_path(Object.assign({ styleType: 'fill', style: `pink` }, MLC.get_dial_ract(setting, setting.tape.cell_height / 2)));
+        let a = new $tk_path(Object.assign({ styleType: 'fill', style: `PowderBlue` }, MLC.get_dial_ract(setting, setting.tape.cell_height / 2)));
         a.alpha = 0.8;
         this.add(a);
-        this.add(new $tk_path(Object.assign({ styleType: 'fill', style: `pink` }, MLC.get_dial_ract(setting))));
+        this.add(new $tk_path(Object.assign({ styleType: 'fill', style: `PowderBlue` }, MLC.get_dial_ract(setting))));
 
         let pitchNames = [];
         setting.pitch_names.forEach((o,i)=>{
-            let s = new ShowObj({x:setting.tape.cell_width*i-tape_width/2+setting.tape.cell_width/2, y:10});
+            let s = new ShowObj({x:setting.tape.cell_width*i-tape_width/2+setting.tape.cell_width/2, y:5});
             let ofs = 7;
             for(let t =0;t< o.length ;t++){
                 if(o[t] === "#")
-                    s.add(new $tk_font({ text: o[t], style: 'black', font: `13px serif`, pos: [-ofs,-ofs] }));
+                    s.add(new $tk_font({ text: o[t], style: 'Maroon', font: `13px serif`, pos: [-ofs,-ofs] }));
                 else if(Object.is(o[t]*1,NaN))
-                    s.add(new $tk_font({ text: o[t], style: 'black', font: `24px serif`, pos: [0,0] }));
+                    s.add(new $tk_font({ text: o[t], style: 'Maroon', font: `24px serif`, pos: [0,0] }));
                 else
-                    s.add(new $tk_font({ text: o[t], style: 'black', font: `13px serif`, pos: [ofs,ofs] }));
+                    s.add(new $tk_font({ text: o[t], style: 'Maroon', font: `13px serif`, pos: [ofs,ofs] }));
             }
 
-            
             this.add(s);
             pitchNames.push(s);
         })
