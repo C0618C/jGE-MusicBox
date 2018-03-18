@@ -5,12 +5,12 @@ class MusicBox {
             width: document.documentElement.clientWidth
             , height: document.documentElement.clientHeight
         });
-        
+
         this.tape = null;
         this.dial = null;
         this.music_box = null;
         document.getElementById(domName).appendChild(this._jGE.GetDom());
-        this.Turn(Symbol.for("vertical"));
+        this.Turn(Symbol.for("vertical")); //    vertical           horizontal
 
         this.LoadResourcePack();
         this._jGE.one("jGE.Scene.Logo.End", () => this.StartUp());
@@ -30,7 +30,7 @@ class MusicBox {
         this.music_box.add(this.dial);
         this.music_box.index = 10;
 
-        this.drag = new DragListener(this,this.curSetting);
+        this.drag = new ActionBinder(this,this.curSetting);
 
         this._jGE.add(this.music_box);
     }
@@ -93,6 +93,7 @@ class MusicBox {
                 , pos: { x: 170, y: 0} //{x:507,y:91} //{x:91.3,y:508}
                 , max_width: window.outerWidth
                 , max_height: window.outerHeight
+                , point_radius:6
             }
             , setting: {
                 zoom: 1     //缩放
