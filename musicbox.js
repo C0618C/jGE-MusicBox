@@ -20,17 +20,27 @@ class MusicBox {
         this.ShowBG();
 
         this._jGE.backgroundColor = this.curSetting.setting.backgroundColor;
+
+
         this.tape = new Tape(this.curSetting);
-        this.tape.Init(this._jGE);
+        this._jGE.InitMessage(this.tape);
+        this.tape.Init();
+
+        this.core = new Core(this._jGE,this.curSetting);
+        this.core.Init(this.tape);
         this.dial = new Dial(this.curSetting);
-        
+        this._jGE.InitMessage(this.dial);
+        this.dial.Init();
+        this.playline = new ShowObj({x:this.curSetting.tape.pos.x,y:this.curSetting.play_line,obj:[new $tk_path({ styleType: 'stroke', style: `red 4`,points:[[-this.curSetting.pitch_names.length/2,0],[this.curSetting.tape.cell_width*this.curSetting.pitch_names.length-this.curSetting.tape.cell_width/2]]})]})      
 
         this.music_box = new ShowObj();
         this.music_box.add(this.tape);
         this.music_box.add(this.dial);
+        this.music_box.add(this.playline);
         this.music_box.index = 10;
 
         this.drag = new ActionBinder(this,this.curSetting);
+
 
         this._jGE.add(this.music_box);
     }
@@ -90,11 +100,12 @@ class MusicBox {
             , tape: {         //纸带
                 cell_width: 23.6
                 , cell_height: 47.3
-                , pos: { x: 170, y: 0} //{x:507,y:91} //{x:91.3,y:508}
+                , pos: { x: 170, y: 200} //{x:507,y:91} //{x:91.3,y:508}
                 , max_width: window.outerWidth
                 , max_height: window.outerHeight
                 , point_radius:6
             }
+            , play_line : 100
             , setting: {
                 zoom: 1     //缩放
                 , direction: undefined //vertical horizontal

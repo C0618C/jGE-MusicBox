@@ -4,6 +4,7 @@ class Music {
     }
 
     AddNote(time,syllable){
+        syllable = Math.round(syllable);
         if(!this.myMusic.has(time)) this.myMusic.set(time,new Set());
         let n = this.myMusic.get(time);
 

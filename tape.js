@@ -20,8 +20,7 @@ class Tape extends ShowObj {
         this.points = new $tk_arc({ styleType: "fill", style: `red`, radius: setting.tape.point_radius });
     }
 
-    Init(jGE) {
-        this.on = jGE.on;
+    Init() {
         this.status.direction = this.setting.setting.direction;
         this.InitListener();
         this.create_line_l();
@@ -68,6 +67,13 @@ class Tape extends ShowObj {
 
         this.setting.tape.pos.x = this.x;
         this.setting.tape.pos.y = this.y;
+    }
+
+    GetTime(){
+        let ct = (this.setting.play_line-(this.status.direction === Symbol.for("vertical")?this.setting.tape.pos.y:this.setting.tape.pos.x))/this.setting.tape.cell_height;
+        let c2 = Math.round(ct*10)/10;
+        if(Math.abs(ct-c2)<0.05 && c2>=0 && c2*10%5==0) return c2;
+        return -1;
     }
 
 

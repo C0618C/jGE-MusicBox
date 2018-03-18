@@ -11,7 +11,7 @@ class ActionBinder{
     _init_tape_drag_listener(mb,setting){
         let w = setting.tape.cell_width*(setting.pitch_names.length)
         let h = setting.tape.max_height;
-        let pu = new $tk_path({styleType:'stroke',style:"red 3" ,points:[[0,0],[w,0],[w,h],[0,h],-1],pos:[-setting.tape.cell_width/2,0]});
+        let pu = new $tk_path({styleType:'stroke',style:"red 0" ,points:[[0,0],[w,0],[w,h],[0,h],-1],pos:[-setting.tape.cell_width/2,0]});
         
         let k  = new Key({code:"tapeAction",upObjs:[pu]});
         DragHelper.InitDrag(k,{

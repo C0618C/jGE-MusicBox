@@ -47,6 +47,7 @@ class MusicBox_Layout_Control{
         :{x:0,y:0}
     }
     
+    //判断点击位置是否能放置点
     static get_tape_point_from_pos(x,y,setting,pos){
         let w = setting.tape.cell_width;
         let h = setting.tape.cell_height/2;
@@ -74,7 +75,7 @@ class MusicBox_Layout_Control{
 
         if(rsl[2] > r*r) return null;
 
-        return {time:rsl[1]/h/2,syllable:rsl[0]/w};
+        return {time:Math.round(rsl[1]/h)/2,syllable:rsl[0]/w};
     }
 
     //唱名表盘，底盘
