@@ -1,5 +1,5 @@
 class Core extends Manager {
-    constructor(_jGE,setting) {
+    constructor(_jGE, setting) {
         super(_jGE, "音乐机芯")
         this.on = null;
         this.broadcast = null;
@@ -7,7 +7,7 @@ class Core extends Manager {
 
         this.isPlaying = false;
 
-        this.setting=setting;
+        this.setting = setting;
 
         this.last_time = -1;
     }
@@ -36,8 +36,23 @@ class Core extends Manager {
     }
 
     Play(time, syllable) {
-        if(syllable.size == 0)return;
+        if (syllable.size == 0) return;
         this.last_time = time;
+
+        syllable.forEach(element => {
+            let id = this.setting.pitch_names[element];
+            let audio = this._jGE.ResourceManager.GetRes(id, "voice");
+            if (audio == null) {
+                console.warn(`加载资源失败，ID:${id}.`);
+                return;
+            }
+            try{
+                audio.play();
+            }catch(err){
+                console.warn(`播放音频文件失败${id}`);
+            }
+            
+        });
 
         this.broadcast("MusicBox.Sing", syllable);
     }

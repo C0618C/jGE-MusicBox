@@ -5,6 +5,7 @@ class Tape extends ShowObj {
             playing: false
             , direction: null
             , NoSize: 30    //序号的尺寸
+            ,opos:setting.tape.pos.y
         };
         this.setting = setting;
         this.curMusic = new Music();
@@ -17,19 +18,27 @@ class Tape extends ShowObj {
         this.on = null;
 
         this.points_pos = new Set();
-        this.points = new $tk_arc({ styleType: "fill", style: `red`, radius: setting.tape.point_radius });
+        this.points = new $tk_arc({ styleType: "fill", style: `blue`, radius: setting.tape.point_radius });
+
+        this.bg = null;
     }
 
-    Init() {
+    Init(bg) {
         this.status.direction = this.setting.setting.direction;
         this.InitListener();
         this.create_line_l();
         this.create_line_s(50);
+
+        this.bg =bg;
     }
 
     InitListener() {
         this.on("MusicBox.Play", () => {
             this.status.playing = true;
+
+            this.y = this.status.opos
+
+            this.setting.tape.pos.y = this.y;
             this.refresh();
         });
         this.on("MusicBox.Stop", () => {
@@ -47,6 +56,8 @@ class Tape extends ShowObj {
 
     DragStart() {
         this._drag_start_pos = new Vector2D(this);
+
+        this.bg._drag_start_pos = this.bg.y;
     }
 
     DragHandler(sP, curP) {
@@ -57,6 +68,8 @@ class Tape extends ShowObj {
 
         this.setting.tape.pos.x = this.x;
         this.setting.tape.pos.y = this.y;
+
+        this.bg.y = this.bg._drag_start_pos + curP.y - sP.y;
     }
 
     ScrollHandler(detail) {
@@ -120,7 +133,7 @@ class Tape extends ShowObj {
 
     update(t, pPos = { x: 0, y: 0 }, angle = 0) {
         if (this.status.playing) {
-            if (this.status.direction === Symbol.for("vertical")) this.setting.tape.pos.y -= this.setting.setting.speed;
+            if (this.status.direction === Symbol.for("vertical")){ this.setting.tape.pos.y -= this.setting.setting.speed; this.bg.y -= this.setting.setting.speed;}
             else this.setting.tape.pos.x -= this.setting.setting.speed;
             this.x = this.setting.tape.pos.x;
             this.y = this.setting.tape.pos.y;

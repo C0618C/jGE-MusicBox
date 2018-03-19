@@ -31,6 +31,13 @@
     (function(){
         const mb = new MusicBox("view_port");
         window.mb = mb;
+        let statu = false;
+        document.body.addEventListener("dblclick",()=>{
+            if(statu) mb.Stop()
+            else mb.Play()
+            statu = !statu;
+        })
+        //setTimeout(mb.Play.bind(mb),5000);
     })();
 </script>
 </body>
