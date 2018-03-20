@@ -41,7 +41,6 @@ class Dial extends ShowObj {
         this.on("MusicBox.Sing", e => {
             e.forEach(s => {
                 this.Play(s);
-                console.log(this.setting.pitch_names[s]);
             })
         })
     }

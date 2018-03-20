@@ -29,6 +29,8 @@ class Tape extends ShowObj {
         this.create_line_l();
         this.create_line_s(50);
 
+        this.curMusic.Load(this.setting.tape.defMusic);
+
         this.bg =bg;
     }
 
@@ -57,7 +59,7 @@ class Tape extends ShowObj {
     DragStart() {
         this._drag_start_pos = new Vector2D(this);
 
-        this.bg._drag_start_pos = this.bg.y;
+        // this.bg._drag_start_pos = this.bg.y;
     }
 
     DragHandler(sP, curP) {
@@ -69,7 +71,7 @@ class Tape extends ShowObj {
         this.setting.tape.pos.x = this.x;
         this.setting.tape.pos.y = this.y;
 
-        this.bg.y = this.bg._drag_start_pos + curP.y - sP.y;
+        // this.bg.y = this.bg._drag_start_pos + curP.y - sP.y;
     }
 
     ScrollHandler(detail) {
@@ -133,7 +135,7 @@ class Tape extends ShowObj {
 
     update(t, pPos = { x: 0, y: 0 }, angle = 0) {
         if (this.status.playing) {
-            if (this.status.direction === Symbol.for("vertical")){ this.setting.tape.pos.y -= this.setting.setting.speed; this.bg.y -= this.setting.setting.speed;}
+            if (this.status.direction === Symbol.for("vertical")){ this.setting.tape.pos.y -= this.setting.setting.speed; /*this.bg.y -= this.setting.setting.speed;*/}
             else this.setting.tape.pos.x -= this.setting.setting.speed;
             this.x = this.setting.tape.pos.x;
             this.y = this.setting.tape.pos.y;

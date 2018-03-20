@@ -9,9 +9,9 @@ class ActionBinder{
 
 
     _init_tape_drag_listener(mb,setting){
-        let w = setting.tape.cell_width*(setting.pitch_names.length)
+        let w = setting.tape.cell_width*(setting.pitch_names.length+5)
         let h = setting.tape.max_height;
-        let pu = new $tk_path({styleType:'stroke',style:"red 0" ,points:[[0,0],[w,0],[w,h],[0,h],-1],pos:[-setting.tape.cell_width/2,0]});
+        let pu = new $tk_path({styleType:'stroke',style:"red 1" ,points:[[0,0],[w,0],[w,h],[0,h],-1],pos:[-setting.tape.cell_width*2.5,0]});
         
         let k  = new Key({code:"tapeAction",upObjs:[pu]});
         DragHelper.InitDrag(k,{
@@ -29,6 +29,7 @@ class ActionBinder{
         tapeListener.get("tapeAction").addEventListener("keyup",(x)=>{
             let p = MLC.get_tape_point_from_pos(x.x,x.y,setting,mb.tape);
             if(p == null) return;
+            if(p.time<0 || p.syllable<0 || p.syllable >=30) return;
             mb._jGE.broadcast("MusicBox.Add.Music",p);
         });
 
