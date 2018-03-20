@@ -4,6 +4,7 @@ class Music {
     }
 
     AddNote(time, syllable) {
+        console.log(time,syllable,time*1)
         syllable = Math.round(syllable);
         time *= 1;
         if (!this.myMusic.has(time)) this.myMusic.set(time, new Set());
@@ -33,7 +34,7 @@ class Music {
 
     Load(ms) {
         try {
-            let mo = JSON.parse(ms);
+            let mo = typeof(ms) === "string"? JSON.parse(ms):ms;
             for (let time in mo) {
                 for (let s of mo[time]) {
                     this.AddNote(time, s);

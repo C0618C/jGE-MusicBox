@@ -41,6 +41,7 @@ class MusicBox {
 
         this.drag = new ActionBinder(this, this.curSetting);
 
+        this.SetMusic(location.hash.replace("#","")||this.curSetting.tape.defMusic);
 
         this._jGE.add(this.music_box);
     }
@@ -87,7 +88,6 @@ class MusicBox {
                 , max_height: (this.curSetting.pitch_names.length - 1) * this.curSetting.tape.cell_width
             });
         }
-        //if (this.tape) this.tape.setting = this.curSetting;
         this.ToggleDirection();
     }
 
@@ -106,7 +106,7 @@ class MusicBox {
                 , max_width: window.outerWidth
                 , max_height: window.outerHeight
                 , point_radius: 8
-                , defMusic:`{"0":[24],"1":[26],"2":[27,12],"3":[19],"4":[24],"5":[26],"6":[27],"8":[29],"10":[26,10],"11":[19],"12":[22],"17":[19],"18":[24,8],"19":[15],"20":[20],"21":[22],"22":[24],"24":[27],"26":[22,7],"27":[15],"28":[19],"30":[22],"32":[19],"34":[20,6],"35":[12],"36":[17],"37":[19],"38":[20],"40":[27],"42":[19,3],"43":[7],"44":[12],"45":[14],"46":[15],"47":[27],"49":[27],"50":[26,4],"51":[9],"52":[14],"53":[21],"54":[9],"56":[18,26],"58":[26,4],"59":[7],"60":[12],"61":[14],"62":[7,11],"64":[24],"65":[26],"66":[27,3],"67":[7],"68":[12],"69":[14,26],"70":[15,27],"71":[19],"72":[29],"73":[24],"74":[26,7],"75":[14],"76":[21],"77":[22],"78":[26],"79":[19],"81":[19],"82":[24,3],"83":[8],"84":[12],"85":[15,22],"86":[24],"87":[15],"88":[27],"89":[8],"90":[22,19,5],"91":[10],"92":[17],"93":[22],"94":[5,19],"95":[0],"96":[20],"97":[19],"98":[20,1],"99":[6],"100":[8],"101":[12,19],"102":[20],"103":[17],"104":[27],"106":[28,3],"107":[7],"108":[24,28],"109":[29,26],"110":[27,15],"111":[19],"112":[24],"113":[12],"114":[27,20],"115":[26],"116":[24,17],"117":[12],"118":[7,17,26],"119":[14],"120":[22,17],"122":[24,3],"123":[7],"124":[14],"125":[15],"126":[19],"8.5":[],"21.5":[],"81.5":[15],"114.5":[6],"139.5":[]}`
+                , defMusic:"skycity"
             }
             , play_line: 100
             , setting: {
@@ -119,12 +119,25 @@ class MusicBox {
             }
             , background: {
                 packageId: "BgImage"
-                , rsid: "SkyCity"
-                , url: "res/skycity.jpg"
+                , rsid: "HappyBirthday"
+                , url: "res/grandfathersclock.jpg"
                 , isShow: false
                 ,offset:{x:79,y:-310}
             }
+            ,music_score:["skycity","happybirthday","grandfathersclock"]
         };
+    }
+
+    GetMusic(name){
+        return this._jGE.ResourceManager.GetRes(name, "musicscore");
+    }
+
+    SetMusic(name){
+        this.tape.InsertMusic(this.GetMusic(name));
+    }
+
+    Clean(){
+        this.tape.curMusic=new Music();
     }
 
     LoadResourcePack() {
@@ -142,7 +155,12 @@ class MusicBox {
         });
         this._jGE.ResourceManager.LoadResPackage("voice",v);
 
-
+        //加载曲谱
+        let m = [];
+        this.curSetting.music_score.forEach(s=>{
+            m.push({id:s,url:`MusicScore/${s}.cfg`,type:"json",method:"GET"});
+        });
+        this._jGE.ResourceManager.LoadResPackage("musicscore",m);
 
     }
 

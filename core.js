@@ -1,8 +1,6 @@
 class Core extends Manager {
     constructor(_jGE, setting) {
         super(_jGE, "音乐机芯")
-        this.on = null;
-        this.broadcast = null;
         this.tape = null;
 
         this.isPlaying = false;
@@ -10,6 +8,7 @@ class Core extends Manager {
         this.setting = setting;
 
         this.last_time = -1;
+        this.max_time = 999;
     }
 
     Init(tape) {
@@ -17,6 +16,7 @@ class Core extends Manager {
 
         this.on("MusicBox.Play", () => {
             this.isPlaying = true;
+            this.max_time = Math.max(...this.tape.curMusic.Score.keys())
         });
         this.on("MusicBox.Stop", () => {
             this.isPlaying = false;
@@ -30,6 +30,8 @@ class Core extends Manager {
         if (!this.isPlaying) return;
         let curtime = this.tape.GetTime();
         if (curtime == this.last_time || curtime < 0) return;
+
+        if(this.max_time+3 < curtime) this.broadcast("MusicBox.Stop");
 
         let syllable = this.tape.curMusic.Score.get(curtime);
         if (syllable) this.Play(curtime, syllable);

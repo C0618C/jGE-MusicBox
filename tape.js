@@ -29,8 +29,6 @@ class Tape extends ShowObj {
         this.create_line_l();
         this.create_line_s(50);
 
-        this.curMusic.Load(this.setting.tape.defMusic);
-
         this.bg =bg;
     }
 
@@ -82,6 +80,9 @@ class Tape extends ShowObj {
 
         this.setting.tape.pos.x = this.x;
         this.setting.tape.pos.y = this.y;
+
+        //DEBUG
+        this.bg.y -= detail;
     }
 
     GetTime(){
@@ -89,6 +90,10 @@ class Tape extends ShowObj {
         let c2 = Math.round(ct*10)/10;
         if(Math.abs(ct-c2)<0.05 && c2>=0 && c2*10%5==0) return c2;
         return -1;
+    }
+
+    InsertMusic(mso){
+        this.curMusic.Load(mso);
     }
 
 

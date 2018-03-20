@@ -1,4 +1,4 @@
-//拖拽控制助手
+//动作助手
 class ActionBinder{
     constructor(mb,setting){
         this.tapeListener  = this._init_tape_drag_listener(mb,setting);
@@ -20,7 +20,7 @@ class ActionBinder{
             ,scrollCallback:mb.tape.ScrollHandler.bind(mb.tape)
         })
         let kb = new Keyboard(mb._jGE);
-        kb.SetPos(setting.tape.pos);
+        kb.SetPos({x:setting.tape.pos.x,y:0});
         kb.add(k);
         return kb;
     }
