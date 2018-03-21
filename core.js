@@ -49,9 +49,10 @@ class Core extends Manager {
                 return;
             }
             try{
+                if(audio.currentTime<audio.duration) audio.load()
                 audio.play();
             }catch(err){
-                console.warn(`播放音频文件失败${id}`);
+                console.warn(`播放音频文件失败${id}:${err}`);
             }
             
         });

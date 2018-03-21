@@ -4,7 +4,6 @@ class Music {
     }
 
     AddNote(time, syllable) {
-        console.log(time,syllable,time*1)
         syllable = Math.round(syllable);
         time *= 1;
         if (!this.myMusic.has(time)) this.myMusic.set(time, new Set());
@@ -24,17 +23,20 @@ class Music {
     Save() {
         let rslObj = {};
         this.myMusic.forEach((syllables, time) => {
-            rslObj[time] = [];
-            syllables.forEach(s => {
-                rslObj[time].push(s);
-            });
+            if (syllables.size > 0) {
+                rslObj[time] = [];
+                syllables.forEach(s => {
+                    rslObj[time].push(s);
+                });
+            }
         });
         return JSON.stringify(rslObj);
     }
 
     Load(ms) {
         try {
-            let mo = typeof(ms) === "string"? JSON.parse(ms):ms;
+            this.myMusic = new Map();
+            let mo = typeof (ms) === "string" ? JSON.parse(ms) : ms;
             for (let time in mo) {
                 for (let s of mo[time]) {
                     this.AddNote(time, s);

@@ -36,7 +36,11 @@
             if(statu) mb.Stop()
             else mb.Play()
             statu = !statu;
-        })
+        });
+        window.addEventListener("hashchange",(...x)=>{
+            mb.SetMusic(location.hash.replace("#",""))
+        });
+        
         //setTimeout(mb.Play.bind(mb),5000);
     })();
 </script>

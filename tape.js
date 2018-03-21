@@ -82,7 +82,7 @@ class Tape extends ShowObj {
         this.setting.tape.pos.y = this.y;
 
         //DEBUG
-        this.bg.y -= detail;
+        if(this.setting.background.isShow)this.bg.y -= detail;
     }
 
     GetTime(){

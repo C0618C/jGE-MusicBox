@@ -41,7 +41,7 @@ class MusicBox {
 
         this.drag = new ActionBinder(this, this.curSetting);
 
-        this.SetMusic(location.hash.replace("#","")||this.curSetting.tape.defMusic);
+        this.SetMusic(this.curSetting.tape.defMusic);
 
         this._jGE.add(this.music_box);
     }
@@ -120,11 +120,11 @@ class MusicBox {
             , background: {
                 packageId: "BgImage"
                 , rsid: "HappyBirthday"
-                , url: "res/grandfathersclock.jpg"
+                , url: "res/《潘多拉之心》.jpg"
                 , isShow: false
                 ,offset:{x:79,y:-310}
             }
-            ,music_score:["skycity","happybirthday","grandfathersclock"]
+            ,music_score:["skycity","happybirthday","grandfathersclock","always_with_you","kanong","MARIAGE_D'AMOUR","Merry_Christmas","liangzu","little_star"]
         };
     }
 
