@@ -1,6 +1,10 @@
 # MusicBox
-填坑中...
-
+![image](/res/cover.jpg?raw=true)  
+  
+## 如何谱曲
+音符与钢琴的对照关系
+![image](/res/piano.jpg?raw=true)  
+  
 ## TODO
 * 录音并分割音频文件
 * ~~加入唱名指示牌子~~
