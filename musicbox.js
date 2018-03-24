@@ -9,6 +9,7 @@ class MusicBox {
         this.tape = null;
         this.dial = null;
         this.music_box = null;
+        this._jGE.InitMessage(this);
         document.getElementById(domName).appendChild(this._jGE.GetDom());
         this.Turn(Symbol.for("vertical")); //    vertical           horizontal
 
@@ -20,7 +21,6 @@ class MusicBox {
         let bg = this.ShowBG();
 
         this._jGE.backgroundColor = this.curSetting.setting.backgroundColor;
-
 
         this.tape = new Tape(this.curSetting);
         this._jGE.InitMessage(this.tape);
@@ -41,9 +41,11 @@ class MusicBox {
 
         this.drag = new ActionBinder(this, this.curSetting);
 
-        this.SetMusic(this.curSetting.tape.defMusic);
+        //this.SetMusic(this.curSetting.tape.defMusic);
 
         this._jGE.add(this.music_box);
+
+        this.broadcast("MusicBox.Init");
     }
 
     ShowBG() {
@@ -98,6 +100,12 @@ class MusicBox {
                 , "C1", "D1", "E1", "F1", "#F1", "G1", "#G1", "A1", "#A1", "B1"
                 , "C2", "#C2", "D2", "#D2", "E2", "F2", "#F2", "G2", "#G2", "A2", "#A2", "B2"
                 , "C3", "D3", "E3"
+            ]
+            ,short_names:[
+                "1.", "2.", "5.", "6.", "7."
+                , "1", "2", "3", "4", "#4", "5", "#5", "6", "#6", "7"
+                , ".1", "#.1", ".2", "#.2", ".3", ".4", "#.4", ".5", "#.5", ".6", "#.6", ".7"
+                , "..1", "..2", "..3"
             ]
             , tape: {         //纸带
                 cell_width: 23.6

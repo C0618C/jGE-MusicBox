@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0"/>
     <title>Music Box</title>
 
     <style>
@@ -16,16 +17,16 @@
 </div>
 <div id="fork_me"><a href="https://github.com/C0618C/jGE-MusicBox"><img src="//vmwed.com/jGE/Test/forkme-on-github-right.png" title="trun to github"/></a></div>
 
-<!-- <script src="//vmwed.com/jGE/jGE.min.js"></script> -->
-<script src="http://127.0.0.1:2262/release/jGE.js"></script>
+<script src="//vmwed.com/jGE/jGE.min.js"></script>
+<!-- <script src="http://127.0.0.1:2262/release/jGE.js"-></script> -->
 <script src="lib/jGE.Debug.js"></script>
-<script src="layout_ctrl.js?=1.1"></script>
-<script src="music.js?=1.1"></script>
-<script src="core.js?=1.1"></script>
-<script src="tape.js?=1.1"></script> 
-<script src="dial.js?=1.1"></script>
-<script src="actionbinder.js?=1.1"></script>
-<script src="musicbox.js?=1.1"></script>
+<script src="layout_ctrl.js?=1.2"></script>
+<script src="music.js?=1.2"></script>
+<script src="core.js?=1.2"></script>
+<script src="tape.js?=1.2"></script> 
+<script src="dial.js?=1.2"></script>
+<script src="actionbinder.js?=1.2"></script>
+<script src="musicbox.js?=1.2"></script>
 
 <script>
     (function(){
@@ -41,6 +42,10 @@
             mb.SetMusic(location.hash.replace("#",""))
         });
         
+        mb.on("MusicBox.Init",()=>{
+            mb.SetMusic(location.hash.replace("#","")||"skycity")
+        });
+                
         //setTimeout(mb.Play.bind(mb),5000);
     })();
 </script>
