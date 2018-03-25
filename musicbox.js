@@ -11,7 +11,7 @@ class MusicBox {
         this.music_box = null;
         this._jGE.InitMessage(this);
         document.getElementById(domName).appendChild(this._jGE.GetDom());
-        this.Turn(Symbol.for("vertical")); //    vertical           horizontal
+        this.Turn(Symbol.for("horizontal")); //    vertical           horizontal
 
         this.LoadResourcePack();
         this._jGE.one("jGE.Scene.Logo.End", () => this.StartUp());
@@ -110,7 +110,7 @@ class MusicBox {
             , tape: {         //纸带
                 cell_width: 23.6
                 , cell_height: 47.3
-                , pos: { x: 170, y: 200 } //{x:507,y:91} //{x:91.3,y:508}
+                , pos: { x: 170, y: 250 } //{x:507,y:91} //{x:91.3,y:508}
                 , max_width: window.outerWidth
                 , max_height: window.outerHeight
                 , point_radius: 8

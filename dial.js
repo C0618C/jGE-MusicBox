@@ -2,7 +2,7 @@
 class Dial extends ShowObj {
     constructor(setting) {
         let tape_width = setting.tape.cell_width * setting.pitch_names.length;
-        let cp = [setting.tape.pos.x + tape_width / 2 - setting.tape.cell_width / 2, setting.tape.pos.y / 2 - 30];
+        let cp = [setting.tape.pos.x + tape_width / 2 - setting.tape.cell_width / 2, setting.tape.pos.y / 2 - 50];
         super({ x: cp[0], y: cp[1] });
 
         this.add(new $tk_arc({ style: "red 5", radius: 10 }));
