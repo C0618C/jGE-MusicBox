@@ -1,11 +1,9 @@
 //负责显示唱名的标盘
 class Dial extends ShowObj {
     constructor(setting) {
-        let tape_width = setting.tape.cell_width * setting.pitch_names.length;
-        let cp = [setting.tape.pos.x + tape_width / 2 - setting.tape.cell_width / 2, setting.tape.pos.y / 2 - 50];
-        super({ x: cp[0], y: cp[1] });
+        super(MLC.get_dial_pos(setting));
 
-        this.add(new $tk_arc({ style: "red 5", radius: 10 }));
+        //this.add(new $tk_arc({ style: "red 5", radius: 10 }));
 
         let a = new $tk_path(Object.assign({ styleType: 'fill', style: `PowderBlue` }, MLC.get_dial_ract(setting, setting.tape.cell_height / 2)));
         a.alpha = 0.8;

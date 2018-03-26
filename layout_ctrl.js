@@ -78,6 +78,27 @@ class MusicBox_Layout_Control{
         return {time:Math.round(rsl[1]/h)/2,syllable:rsl[0]/w};
     }
 
+    //获得谱可拖动的范围
+    static get_tape_drag_area(setting){
+        return setting.setting.direction === Symbol.for("vertical")
+        ?[setting.tape.cell_width*(setting.pitch_names.length+5),setting.tape.max_height]
+        :[setting.tape.max_width,setting.tape.cell_width*(setting.pitch_names.length+5)]
+    }
+    //获得谱可拖动的对象的定位
+    static get_tape_drag_pos(setting){
+        return setting.setting.direction === Symbol.for("vertical")
+        ?[-setting.tape.cell_width*2.5,0]
+        :[-setting.tape.pos.x,setting.tape.pos.y-setting.tape.cell_width*2.5]
+    }
+
+    //唱名表盘整体位置
+    static get_dial_pos(setting){
+        let tape_width = setting.tape.cell_width * setting.pitch_names.length;
+        return setting.setting.direction === Symbol.for("vertical")
+        ?{x:setting.tape.pos.x + tape_width / 2 - setting.tape.cell_width / 2, y:setting.tape.pos.y / 2 - 50}
+        :{y:setting.tape.pos.y + tape_width / 2 - setting.tape.cell_width / 2, x:setting.tape.pos.x / 2 + 250}
+    }
+
     //唱名表盘，底盘
     static get_dial_ract(setting,px=0){
         let w = setting.tape.cell_width*setting.pitch_names.length/2+setting.tape.cell_width/3;
@@ -92,7 +113,14 @@ class MusicBox_Layout_Control{
         let tape_width = setting.tape.cell_width * setting.pitch_names.length;
         return setting.setting.direction === Symbol.for("vertical")
         ?{x:setting.tape.cell_width*i-tape_width/2+setting.tape.cell_width/2, y:5}
-        :{x:5, y:setting.tape.cell_width*(setting.pitch_names.length - i-1.5)-tape_width/2+setting.tape.cell_width/2};
+        :{x:5, y:setting.tape.cell_width*(setting.pitch_names.length - i-1)-tape_width/2+setting.tape.cell_width/2};
+    }
+
+    //播放进度红线
+    static get_play_line_pos(setting){
+        return setting.setting.direction === Symbol.for("vertical")
+        ?{x: setting.tape.pos.x, y: setting.play_line}
+        :{y: setting.tape.pos.x, x: setting.play_line}
     }
 
 }

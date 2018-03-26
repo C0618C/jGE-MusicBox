@@ -31,7 +31,8 @@ class MusicBox {
         this.dial = new Dial(this.curSetting);
         this._jGE.InitMessage(this.dial);
         this.dial.Init();
-        this.playline = new ShowObj({ x: this.curSetting.tape.pos.x, y: this.curSetting.play_line, obj: [new $tk_path({ styleType: 'stroke', style: `red 4`, points: [[-this.curSetting.pitch_names.length / 2, 0], [this.curSetting.tape.cell_width * this.curSetting.pitch_names.length - this.curSetting.tape.cell_width / 2]] })] })
+        //进度红线
+        this.playline = new ShowObj({ ...MLC.get_play_line_pos(this.curSetting), obj: [new $tk_path({ styleType: 'stroke', style: `red 4`, points: [[-this.curSetting.pitch_names.length / 2, 0], [this.curSetting.tape.cell_width * this.curSetting.pitch_names.length - this.curSetting.tape.cell_width / 2]] })] })
 
         this.music_box = new ShowObj();
         this.music_box.add(this.tape);
