@@ -22,7 +22,7 @@
 
 
 ## 有问题的音频
- #F2
+ <sup>#</sup>F<sub>2</sub>
 
 ## 缺失的音频
-D G A1
+D G A<sub>1</sub>
