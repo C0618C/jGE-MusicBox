@@ -32,7 +32,7 @@ class MusicBox {
         this._jGE.InitMessage(this.dial);
         this.dial.Init();
         //进度红线
-        this.playline = new ShowObj({ ...MLC.get_play_line_pos(this.curSetting), obj: [new $tk_path({ styleType: 'stroke', style: `red 4`, points: [[-this.curSetting.pitch_names.length / 2, 0], [this.curSetting.tape.cell_width * this.curSetting.pitch_names.length - this.curSetting.tape.cell_width / 2]] })] })
+        this.playline = new ShowObj({ ...MLC.get_play_line_pos(this.curSetting), obj: [new $tk_path({ styleType: 'stroke', style: `red 4`, points: MLC.get_play_line_points(this.curSetting) })] })
 
         this.music_box = new ShowObj();
         this.music_box.add(this.tape);
@@ -91,6 +91,7 @@ class MusicBox {
                 , max_height: (this.curSetting.pitch_names.length - 1) * this.curSetting.tape.cell_width
             });
         }
+        [this.curSetting.tape.pos.x,this.curSetting.tape.pos.y]=[this.curSetting.tape.pos.y,this.curSetting.tape.pos.x];
         this.ToggleDirection();
     }
 
@@ -111,13 +112,13 @@ class MusicBox {
             , tape: {         //纸带
                 cell_width: 23.6
                 , cell_height: 47.3
-                , pos: { x: 170, y: 250 } //{x:507,y:91} //{x:91.3,y:508}
+                , pos: { x: 170, y: 350 } //{x:507,y:91} //{x:91.3,y:508}
                 , max_width: window.outerWidth
                 , max_height: window.outerHeight
                 , point_radius: 8
                 , defMusic:"skycity"
             }
-            , play_line: 100
+            , play_line: 250
             , setting: {
                 zoom: 1     //缩放
                 , direction: undefined //vertical horizontal

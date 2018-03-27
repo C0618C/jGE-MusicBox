@@ -29,6 +29,7 @@ class Core extends Manager {
     update(t) {
         if (!this.isPlaying) return;
         let curtime = this.tape.GetTime();
+        // if(curtime !=-1)console.log(curtime)
         if (curtime == this.last_time || curtime < 0) return;
 
         if(this.max_time+3 < curtime) this.broadcast("MusicBox.Stop");

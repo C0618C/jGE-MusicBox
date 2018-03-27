@@ -44,7 +44,7 @@ class MusicBox_Layout_Control{
     static get_tape_point_to_pos(time,syllable,setting,status){
         return status.direction === Symbol.for("vertical")
         ?{x:syllable*setting.tape.cell_width,y:time*setting.tape.cell_height}
-        :{x:0,y:0}
+        :{x:time*setting.tape.cell_height,y:(setting.pitch_names.length- syllable-1)*setting.tape.cell_width}
     }
     
     //判断点击位置是否能放置点
@@ -74,7 +74,7 @@ class MusicBox_Layout_Control{
         }
 
         if(rsl[2] > r*r) return null;
-
+        if(setting.setting.direction !== Symbol.for("vertical"))rsl[0] = (setting.pitch_names.length-1) * w - rsl[0]
         return {time:Math.round(rsl[1]/h)/2,syllable:rsl[0]/w};
     }
 
@@ -95,8 +95,8 @@ class MusicBox_Layout_Control{
     static get_dial_pos(setting){
         let tape_width = setting.tape.cell_width * setting.pitch_names.length;
         return setting.setting.direction === Symbol.for("vertical")
-        ?{x:setting.tape.pos.x + tape_width / 2 - setting.tape.cell_width / 2, y:setting.tape.pos.y / 2 - 50}
-        :{y:setting.tape.pos.y + tape_width / 2 - setting.tape.cell_width / 2, x:setting.tape.pos.x / 2 + 250}
+        ?{x:setting.tape.pos.x + tape_width / 2 - setting.tape.cell_width / 2, y:setting.play_line-25}
+        :{y:setting.tape.pos.y + tape_width / 2 - setting.tape.cell_width / 2, x:setting.play_line-25}
     }
 
     //唱名表盘，底盘
@@ -120,8 +120,18 @@ class MusicBox_Layout_Control{
     static get_play_line_pos(setting){
         return setting.setting.direction === Symbol.for("vertical")
         ?{x: setting.tape.pos.x, y: setting.play_line}
-        :{y: setting.tape.pos.x, x: setting.play_line}
+        :{y: setting.tape.pos.y, x: setting.play_line}
     }
+
+    static get_play_line_points(setting){
+        return setting.setting.direction === Symbol.for("vertical")
+        ?[[-setting.pitch_names.length / 2, 0], [setting.tape.cell_width * setting.pitch_names.length - setting.tape.cell_width / 2]]
+        :[[0,-setting.pitch_names.length / 2], [0,setting.tape.cell_width * setting.pitch_names.length - setting.tape.cell_width / 2]]
+    }
+
+    // static get_play_line_local(setting){
+    //     return setting.setting.direction === Symbol.for("vertical")?(setting.play_line+setting.tape.pos.y): (setting.play_line+setting.tape.pos.x)
+    // }
 
 }
 
