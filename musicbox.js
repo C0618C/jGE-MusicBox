@@ -11,7 +11,8 @@ class MusicBox {
         this.music_box = null;
         this._jGE.InitMessage(this);
         document.getElementById(domName).appendChild(this._jGE.GetDom());
-        this.Turn(Symbol.for("horizontal")); //    vertical           horizontal
+        let dir = this._jGE.GetArea();
+        this.Turn(Symbol.for(dir.width>dir.height?"horizontal":"vertical")); //    vertical           horizontal
 
         this.LoadResourcePack();
         this._jGE.one("jGE.Scene.Logo.End", () => this.StartUp());
