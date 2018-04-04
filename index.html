@@ -1,53 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0" />
     <title>Music Box</title>
-
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"        crossorigin="anonymous">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <style>
-        * {padding: 0px;margin: 0px;user-select: none; }
-        body{overflow: hidden;}
-        #fork_me{position: fixed;top:0px;right: 0px;z-index: 9999; }
+        * {
+            padding: 0px;
+            margin: 0px;
+            user-select: none;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        #fork_me {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            z-index: 9999;
+        }
     </style>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"        crossorigin="anonymous"></script>
+
 </head>
+
 <body>
-<div id="view_port">
-    <!-- <img src="res/skycity.jpg" /> -->
-</div>
-<div id="fork_me"><a href="https://github.com/C0618C/jGE-MusicBox"><img src="//vmwed.com/jGE/Test/forkme-on-github-right.png" title="trun to github"/></a></div>
+    <div id="view_port">
+        <!-- <img src="res/skycity.jpg" /> -->
+    </div>
+    <div id="fork_me">
+        <a href="https://github.com/C0618C/jGE-MusicBox">
+            <img src="//vmwed.com/jGE/Test/forkme-on-github-right.png" title="trun to github" />
+        </a>
+    </div>
+    <div class="position-fixed fixed-bottom overflow-hidden p-3 p-md-5text-center bg-dark">
+        <div class="btn-group dropup">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="ion-ios-musical-note"></span> 预设曲谱
+            </button>
+            <!-- :["skycity","happybirthday","grandfathersclock","always_with_you","kanong","MARIAGE_D'AMOUR","Merry_Christmas","liangzu","little_star"] -->
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#skycity">天空之城</a>
+                <a class="dropdown-item" href="#grandfathersclock">老爷爷的钟</a>
+                <a class="dropdown-item" href="#happybirthday">生日快乐</a>
+                <a class="dropdown-item" href="#always_with_you">always with me</a>
+                <a class="dropdown-item" href="#kanong">卡农</a>
+                <a class="dropdown-item" href="#MARIAGE_D'AMOUR">梦中的婚礼</a>
+                <a class="dropdown-item" href="#Merry_Christmas">圣诞快乐</a>
+                <a class="dropdown-item" href="#liangzu">梁祝</a>
+                <a class="dropdown-item" href="#little_star">小星星</a>
+            </div>
+        </div>
 
-<script src="//vmwed.com/jGE/jGE.min.js"></script>
-<!-- <script src="http://127.0.0.1:2262/release/jGE.js"-></script> -->
-<script src="lib/jGE.Debug.js"></script>
-<script src="layout_ctrl.js?=1.2"></script>
-<script src="music.js?=1.2"></script>
-<script src="core.js?=1.2"></script>
-<script src="tape.js?=1.2"></script> 
-<script src="dial.js?=1.2"></script>
-<script src="actionbinder.js?=1.2"></script>
-<script src="musicbox.js?=1.2"></script>
+        <button type="button" class="btn btn-success ml-5"><span class="ion-play" title="play" aria-hidden="true"></span></button>
+        <button type="button" class="btn btn-secondary"><span class="ion-stop" title="stop" aria-hidden="true"></span></button>
+        <button type="button" class="btn btn-secondary"><span class="ion-volume-medium" title="volume" aria-hidden="true"></span></button>
+        <button type="button" class="btn btn-primary ml-5"><span class="ion-ios-compose-outline" title="volume" aria-hidden="true"></span></button>
+    </div>
 
-<script>
-    (function(){
-        const mb = new MusicBox("view_port");
-        window.mb = mb;
-        let statu = false;
-        document.body.addEventListener("dblclick",()=>{
-            if(statu) mb.Stop()
-            else mb.Play()
-            statu = !statu;
-        });
-        window.addEventListener("hashchange",(...x)=>{
-            mb.SetMusic(location.hash.replace("#",""))
-        });
-        
-        mb.on("MusicBox.Init",()=>{
-            mb.SetMusic(location.hash.replace("#","")||"skycity")
-        });
-                
-        //setTimeout(mb.Play.bind(mb),5000);
-    })();
-</script>
+    <script src="//vmwed.com/jGE/jGE.min.js"></script>
+    <!-- <script src="http://127.0.0.1:2262/release/jGE.js"-></script> -->
+    <script src="lib/jGE.Debug.js"></script>
+    <script src="layout_ctrl.js?=1.2"></script>
+    <script src="music.js?=1.2"></script>
+    <script src="core.js?=1.2"></script>
+    <script src="tape.js?=1.2"></script>
+    <script src="dial.js?=1.2"></script>
+    <script src="actionbinder.js?=1.2"></script>
+    <script src="musicbox.js?=1.2"></script>
+
+    <script>
+        (function () {
+            const mb = new MusicBox("view_port");
+            window.mb = mb;
+            let statu = false;
+            document.body.addEventListener("dblclick", () => {
+                if (statu) mb.Stop()
+                else mb.Play()
+                statu = !statu;
+            });
+            window.addEventListener("hashchange", (...x) => {
+                mb.SetMusic(location.hash.replace("#", ""))
+            });
+
+            mb.on("MusicBox.Init", () => {
+                mb.SetMusic(location.hash.replace("#", "") || "skycity")
+            });
+
+            //setTimeout(mb.Play.bind(mb),5000);
+        })();
+    </script>
 </body>
+
 </html>
