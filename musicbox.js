@@ -43,8 +43,6 @@ class MusicBox {
 
         this.drag = new ActionBinder(this, this.curSetting);
 
-        //this.SetMusic(this.curSetting.tape.defMusic);
-
         this._jGE.add(this.music_box);
 
         this.broadcast("MusicBox.Init");
@@ -173,6 +171,10 @@ class MusicBox {
         });
         this._jGE.ResourceManager.LoadResPackage("musicscore",m);
 
+    }
+
+    PlayStatus(){
+        return this.tape.status.playing;
     }
 
 

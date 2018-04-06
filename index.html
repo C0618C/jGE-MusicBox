@@ -59,11 +59,11 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-success ml-5"><span class="ion-play" title="play" aria-hidden="true"></span></button>
+        <button type="button" class="btn btn-success ml-5" id="pp_bt"><span class="ion-play" title="play" aria-hidden="true" id="pp_ion"></span></button>
         <button type="button" class="btn btn-secondary"><span class="ion-stop" title="stop" aria-hidden="true"></span></button>
         <button type="button" class="btn btn-secondary"><span class="ion-android-volume-off" title="volume" aria-hidden="true"></span></button>
-        <button type="button" class="btn btn-primary ml-5"><span class="ion-ios-compose-outline" title="volume" aria-hidden="true"></span></button>
-        <button type="button" class="btn btn-secondary"><span class="ion-android-phone-portrait" title="volume" aria-hidden="true"></span></button>
+        <a class="btn btn-primary ml-5" href="#"><span class="ion-ios-compose-outline" title="New Note" aria-hidden="true"></span></a>
+        <button type="button" class="btn btn-secondary" id="dir_bt"><span class="ion-android-phone-portrait" title="Direction" aria-hidden="true" id="dir_ion"></span></button>
     </div>
 
     <script src="//vmwed.com/jGE/jGE.min.js"></script>
@@ -76,6 +76,7 @@
     <script src="dial.js?=1.2"></script>
     <script src="actionbinder.js?=1.2"></script>
     <script src="musicbox.js?=1.2"></script>
+    <script src="UI.js?=1.2"></script>
 
     <script>
         (function () {
@@ -92,8 +93,13 @@
             });
 
             mb.on("MusicBox.Init", () => {
-                mb.SetMusic(location.hash.replace("#", "") || "skycity")
+                let m = location.hash.replace("#", "") || "skycity";
+                location.hash = "";
+                location.hash = m;
+                let ui = new UI();
+                ui.Init(mb);
             });
+
 
             //setTimeout(mb.Play.bind(mb),5000);
         })();
