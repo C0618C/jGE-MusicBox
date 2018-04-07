@@ -4,14 +4,12 @@ class UI{
 
     }
     Init(mb){
+        mb._jGE.InitMessage(this);
         $("#pp_bt").on("click",(e)=>{
-            let sb = $("#pp_ion");
             if(mb.PlayStatus()){
                 mb.Stop();
-                sb.attr("class","ion-play")
             }else{
                 mb.Play();
-                sb.attr("class","ion-pause");
             }
         });
         $("#dir_bt").on("click",(e)=>{
@@ -24,5 +22,28 @@ class UI{
                 sb.attr("class","ion-android-phone-portrait");
             }
         });
+
+        let sb = $("#pp_ion");        
+        this.on("MusicBox.Play",()=>{
+            sb.attr("class","ion-pause");            
+        });
+        this.on("MusicBox.Stop",()=>{
+            sb.attr("class","ion-play");
+        });
+
+        $("#loop_bt").on("click",function (e){
+            let bt = $(this);
+            if(bt.hasClass("btn-light")){
+                
+            }else{
+                
+            }
+
+            bt.toggleClass("btn-light").toggleClass("btn-secondary");
+        });
+    }
+
+    BtSymboToggle(obj,true_smb,false_smb){
+        
     }
 }
