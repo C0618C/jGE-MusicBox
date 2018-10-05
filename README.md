@@ -1,4 +1,6 @@
 # MusicBox
+[![MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![jGE](https://img.shields.io/badge/developing%20with-jGE-2077ff.svg)](http://www.vmwed.com/)
 ![image](/res/cover.jpg?raw=true)  
   
 ## 如何谱曲
