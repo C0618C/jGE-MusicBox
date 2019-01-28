@@ -13,14 +13,7 @@ class UI{
             }
         });
         $("#dir_bt").on("click",(e)=>{
-            let sb = $("#dir_ion");
-            if(sb.hasClass("ion-android-phone-portrait")){
-                mb.Turn(Symbol.for("vertical"));
-                sb.attr("class","ion-android-phone-landscape")
-            }else{
-                mb.Turn(Symbol.for("horizontal"));
-                sb.attr("class","ion-android-phone-portrait");
-            }
+            BtSymboToggle($("#dir_ion"),"ion-android-phone-portrait","ion-android-phone-landscape",()=>mb.Turn(Symbol.for("horizontal")),()=>mb.Turn(Symbol.for("vertical")));
         });
 
         let sb = $("#pp_ion");        
@@ -43,7 +36,13 @@ class UI{
         });
     }
 
-    BtSymboToggle(obj,true_smb,false_smb){
-        
+    BtSymboToggle(obj,true_smb,false_smb,true_fun,false_fun){
+        if(obj.hasClass(true_smb)){
+            true_fun();
+            obj.attr("class",false_smb);
+        }else{
+            false_fun();
+            obj.attr("class",true_smb);
+        }  
     }
 }
